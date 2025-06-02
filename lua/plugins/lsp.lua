@@ -108,7 +108,8 @@ return {
                 window = {
                     border = 'rounded',
                 },
-            }
+            },
+            fuzzy = { implementation = 'prefer_rust_with_warning' },  -- 使用 Rust 实现模糊匹配
         },
         opts_extend = { "sources.default" }
     },

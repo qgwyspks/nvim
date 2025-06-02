@@ -9,11 +9,11 @@ return {
     },
 
     -- 左侧 git 提示
-    -- {
-    --     "lewis6991/gitsigns.nvim",
-    --     config = function()
-    --         require("plugins.configs.gitsigns")
-    --     end
-    -- },
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("plugins.configs.gitsigns")
+        end
+    },
 
 }
