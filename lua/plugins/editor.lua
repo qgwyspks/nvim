@@ -44,44 +44,6 @@ return {
         end,
     },
 
-    -- -- 自动补全括号
-    -- {
-    --     "windwp/nvim-autopairs",
-    --     event = "InsertEnter",
-    --     config = true,
-    -- },
-
-    -- {
-    --     "folke/trouble.nvim",
-    --     dependencies = { "nvim-tree/nvim-web-devicons" },
-    --     cmd = { "TroubleToggle", "Trouble" },
-    --     keys = {
-    --         { "<leader>xx", "<cmd>TroubleToggle<CR>" },
-    --         { "<leader>xc",  "<cmd>TroubleClose<CR>" },
-    --         { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Document Diagnostics (Trouble)" },
-    --         { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "Workspace Diagnostics (Trouble)" },
-    --         { "<leader>xr",  "<cmd>TroubleToggle lsp_references<CR>" },
-    --         { "<leader>xq",  "<cmd>TroubleToggle quickfix<CR>", desc = "Quickfix List (Trouble)" },
-    --         { "<leader>xl", "<cmd>TroubleToggle loclist<CR>", desc = "Location List (Trouble)" },
-    --     },
-    --     opts = {
-    --         use_diagnostic_signs = true
-    --     }
-    -- },
-
-    -- markdown-preview
-    -- {
-    --     "OXY2DEV/markview.nvim",
-    --     lazy = false,  -- Recommended
-    --     -- ft = "markdown"  -- If you decide to lazy-load anyway
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter",
-    --         "nvim-tree/nvim-web-devicons"
-    --     },
-    --     keys = {
-    --         { "<leader>mv", "<cmd>Markview<CR>" },
-    --     }
-    -- }
     {
         'MeanderingProgrammer/render-markdown.nvim',
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
