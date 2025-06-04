@@ -1,24 +1,3 @@
-local languages = {
-    "bashls", -- Bash
-    "clangd",  -- C/C++
-    -- "csharp_ls", -- C#
-    -- "dockerls", -- Docker
-    -- "docker_compose_language_service",  -- Docker Compose
-    -- "html",  -- HTML
-    -- "cssls",  -- CSS
-    -- "tsserver",  -- JS/TS
-    -- "vimls",  -- VimL
-    -- "jsonls",  -- JSON
-    -- "taplo",  -- TOML
-    "gopls",  -- Go
-    "lua_ls",  -- Lua
-    -- "marksman",  -- Markdown
-    "basedpyright",
-    -- "pyright",  -- Python pylsp ruff rufflsp
-    -- "texlab",  -- LaTeX
-}
-
-
 return {
     {
         'saghen/blink.cmp',
@@ -118,7 +97,7 @@ return {
         dependencies = { 'saghen/blink.cmp' },
         opts = {},
         config = function()
-            require("plugins.configs.lspconfig").setup(languages)
+            require("plugins.configs.lspconfig").setup()
         end
     },
 }
