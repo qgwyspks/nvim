@@ -1,3 +1,24 @@
+local languages = {
+    "bashls", -- Bash
+    "clangd",  -- C/C++
+    -- "csharp_ls", -- C#
+    -- "dockerls", -- Docker
+    -- "docker_compose_language_service",  -- Docker Compose
+    -- "html",  -- HTML
+    -- "cssls",  -- CSS
+    -- "tsserver",  -- JS/TS
+    -- "vimls",  -- VimL
+    -- "jsonls",  -- JSON
+    -- "taplo",  -- TOML
+    "gopls",  -- Go
+    "protols",  -- Proto3  cargo install protols
+    "lua_ls",  -- Lua
+    -- "marksman",  -- Markdown
+    "basedpyright",  -- Python
+    -- "pyright",  -- Python pylsp ruff rufflsp
+    -- "texlab",  -- LaTeX
+}
+
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status then
     return
@@ -59,9 +80,17 @@ server_configs.bashls = {
 
 server_configs.clangd = {
     cmd = { "clangd" },
-    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
     root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" },
 }
+
+-- https://github.com/coder3101/protols
+server_configs.protols = {
+    cmd = { "protols" },
+    filetypes = { "proto" },
+    root_markers = { ".git" },
+}
+
 
 server_configs.gopls = {
     cmd = { "gopls" },
@@ -152,7 +181,7 @@ server_configs.lua_ls = {
 
 local M = {}
 
-M.setup = function(languages)
+M.setup = function()
     for _, language in ipairs(languages) do
         vim.lsp.enable(language)
 

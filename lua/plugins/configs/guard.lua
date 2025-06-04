@@ -16,15 +16,20 @@ ft('python'):fmt({
 })
 
 -- ft('c,cpp'):fmt({
---     cmd = 'clang-format',
---     stdin = true,
---     ignore_patterns = { 'neovim', 'vim' },
--- })
-
-ft("lua"):fmt("lsp"):append("stylua")
+-- --     cmd = 'clang-format',
+-- --     stdin = true,
+-- --     ignore_patterns = { 'neovim', 'vim' },
+-- -- })
+--
+-- ft("lua"):fmt("lsp"):append("stylua")
 -- :lint('selene')
 
-ft("go"):fmt("lsp"):append("gofmt")
+ft("go"):fmt({
+    cmd = "gofmt",
+    args = { "-s", "-w" },
+    fname = true,
+})
+
 
 ft("json"):fmt("lsp")
 
