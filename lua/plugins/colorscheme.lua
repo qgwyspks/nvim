@@ -38,7 +38,7 @@ return {
         proiority = 1000,
         config = function()
             local c = { fg = "#ff966c", italic = true }
-            require("gruvbox").setup({
+            require("gruvbox").setup {
                 italic = {
                     strings = true,
                     emphasis = true,
@@ -53,18 +53,18 @@ return {
                     -- ["Function"] = { fg = "#86e1fc", italic = true },
                     ["@comment"] = { fg = "#c3e88d", italic = true },
                     -- ["GruvboxGreenBold"] = { fg = "#fca7ea", bold = true },
-                    ["@lsp.type.function"] = { link = "Special" },
+                    -- ["@lsp.type.function"] = { link = "Special" },
                     -- ["@lsp.type.function"] = { fg = "#fe8019", italic = true },
-                    ["@keyword"] = c,  -- #86e1fc   #636da6  #ff966c  #c3e88d  #fca7ea  #fb4934
+                    -- ["@keyword"] = c,  -- #86e1fc   #636da6  #ff966c  #c3e88d  #fca7ea  #fb4934
                     -- ["GruvboxRed"] = { fg = "#ff966c", italic = true },  -- #fb4934
-                    ["@keyword.return"] = c,
-                    ["pythonStatement"] = c,
+                    -- ["@keyword.return"] = c,
+                    -- ["pythonStatement"] = c,
                 },
-            })
+            }
             vim.o.background = "dark" -- or "light"
-            vim.cmd([[ colorscheme gruvbox ]])
+            vim.cmd [[ colorscheme gruvbox ]]
         end,
-    }
+    },
     -- {
     --     "navarasu/onedark.nvim",
     --     lazy = false,

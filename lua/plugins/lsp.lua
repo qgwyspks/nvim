@@ -36,7 +36,7 @@ return {
                     scrollbar = true,
                     draw = {
                         padding = 1,
-                        gap = 2,
+                        gap = 1,
                         treesitter = { 'lsp' },
                         columns = {
                             { 'kind_icon' },
@@ -84,8 +84,12 @@ return {
             },
             signature = {
                 enabled = true,
+                trigger = {
+                    enabled = false,
+                },
                 window = {
                     border = 'rounded',
+                    show_documentation = false,
                 },
             },
             fuzzy = { implementation = 'prefer_rust_with_warning' },  -- 使用 Rust 实现模糊匹配
@@ -95,9 +99,16 @@ return {
     {
         'neovim/nvim-lspconfig',
         dependencies = { 'saghen/blink.cmp' },
-        opts = {},
+        opts = {
+            diagnostics = {
+                underline = true,
+                update_in_insert = false,
+            },
+            inlay_hints = { enabled = true },
+            codelens = { enabled = true },
+        },
         config = function()
-            require("plugins.configs.lspconfig").setup()
+            require("plugins.configs.lspconfig").setup(_, opts)
         end
     },
 }

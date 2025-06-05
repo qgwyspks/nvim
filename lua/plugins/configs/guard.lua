@@ -28,6 +28,9 @@ ft("go"):fmt({
     cmd = "gofmt",
     args = { "-s", "-w" },
     fname = true,
+}):append({
+    cmd = "goimports",
+    args = { "-w" },
 })
 
 

@@ -31,8 +31,7 @@ end
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 ---@class PluginLspOpts
-local opts = {
-    servers = {},
+local default_opts = {
     capabilities = capabilities,
 }
 
@@ -79,9 +78,22 @@ server_configs.bashls = {
 }
 
 server_configs.clangd = {
-    cmd = { "clangd" },
+    cmd = {
+        "clangd",
+        "--background-index",  -- 启用后台索引
+        "--clang-tidy",  -- 启用 clang-tidy
+        "--header-insertion=iwyu", -- 使用 Include What You Use (IWYU) 插入头文件
+        "--completion-style=detailed",  -- 使用详细的补全样式
+        "--function-arg-placeholders",  -- 在函数参数中使用占位符
+        "--fallback-style=llvm", -- 使用 LLVM 风格作为回退样式
+    },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
     root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" },
+    init_options = {
+        clangdFileStatus = true,  -- 启用文件状态
+        usePlaceholders = true,  -- 在代码补全时使用占位符
+        completeUnimported = true,  -- 自动补全未导入的头文件
+    },
 }
 
 -- https://github.com/coder3101/protols
@@ -167,6 +179,16 @@ server_configs.lua_ls = {
                 },
                 checkThirdParty = false, -- 不检查第三方库
             },
+            codeLens = { enable = true },
+            doc = { privateName = { "^_" } },
+            hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
+            },
             completion = { callSnippet = "Replace" }, -- 仅显示调用片段
             format = {
                 enable = true,
@@ -181,7 +203,11 @@ server_configs.lua_ls = {
 
 local M = {}
 
-M.setup = function()
+M.setup = function(_, opts)
+    -- vim.lsp.set_log_level("debug")
+
+    opts = vim.tbl_deep_extend("force", default_opts, opts or {})
+
     for _, language in ipairs(languages) do
         vim.lsp.enable(language)
 
