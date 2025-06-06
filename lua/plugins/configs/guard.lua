@@ -1,18 +1,19 @@
 local guard_status, guard = pcall(require, "guard")
 if not guard_status then
-    return
+	return
 end
 
-local ft = require "guard.filetype"
+local ft = require("guard.filetype")
 
-ft('python'):fmt({
-    cmd = "ruff",
-    args = {
-        "format",
-        "--config", "~/.config/custom_ruff_config.toml",
-    },
-    fname = true,
-    stdin = false,
+ft("python"):fmt({
+	cmd = "ruff",
+	args = {
+		"format",
+		"--config",
+		"~/.config/custom_ruff_config.toml",
+	},
+	fname = true,
+	stdin = false,
 })
 
 -- ft('c,cpp'):fmt({
@@ -25,25 +26,24 @@ ft('python'):fmt({
 -- :lint('selene')
 
 ft("go"):fmt({
-    cmd = "gofmt",
-    args = { "-s", "-w" },
-    fname = true,
+	cmd = "gofmt",
+	args = { "-s", "-w" },
+	fname = true,
 }):append({
-    cmd = "goimports",
-    args = { "-w" },
+	cmd = "goimports",
+	args = { "-w" },
 })
-
 
 ft("json"):fmt("lsp")
 
 ft("sh"):fmt({
-    cmd = "shfmt",
-    args = { "-" },
-    stdin = true,
+	cmd = "shfmt",
+	args = { "-" },
+	stdin = true,
 }):lint("shellcheck")
 
 vim.g.guard_config = {
-    fmt_on_save = true,
-    lsp_as_default_formatter = false,
-    -- save_on_fmt = true,
+	fmt_on_save = true,
+	lsp_as_default_formatter = false,
+	-- save_on_fmt = true,
 }

@@ -1,27 +1,27 @@
 local languages = {
-    "bashls", -- Bash
-    "clangd", -- C/C++
-    -- "csharp_ls", -- C#
-    -- "dockerls", -- Docker
-    -- "docker_compose_language_service",  -- Docker Compose
-    -- "html",  -- HTML
-    -- "cssls",  -- CSS
-    -- "tsserver",  -- JS/TS
-    -- "vimls",  -- VimL
-    -- "jsonls",  -- JSON
-    -- "taplo",  -- TOML
-    "gopls", -- Go
-    "protols", -- Proto3  cargo install protols
-    "lua_ls", -- Lua
-    -- "marksman",  -- Markdown
-    "basedpyright", -- Python
-    -- "pyright",  -- Python pylsp ruff rufflsp
-    -- "texlab",  -- LaTeX
+	"bashls", -- Bash
+	"clangd", -- C/C++
+	-- "csharp_ls", -- C#
+	-- "dockerls", -- Docker
+	-- "docker_compose_language_service",  -- Docker Compose
+	-- "html",  -- HTML
+	-- "cssls",  -- CSS
+	-- "tsserver",  -- JS/TS
+	-- "vimls",  -- VimL
+	-- "jsonls",  -- JSON
+	-- "taplo",  -- TOML
+	"gopls", -- Go
+	"protols", -- Proto3  cargo install protols
+	"lua_ls", -- Lua
+	-- "marksman",  -- Markdown
+	"basedpyright", -- Python
+	-- "pyright",  -- Python pylsp ruff rufflsp
+	-- "texlab",  -- LaTeX
 }
 
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status then
-    return
+	return
 end
 
 -- local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -32,7 +32,7 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 ---@class PluginLspOpts
 local default_opts = {
-    capabilities = capabilities,
+	capabilities = capabilities,
 }
 
 -- opts.capabilities = vim.tbl_deep_extend(
@@ -46,202 +46,205 @@ local default_opts = {
 local server_configs = {}
 
 server_configs.basedpyright = {
-    cmd = { "basedpyright-langserver", "--stdio" },
-    filetypes = { "python" },
-    root_markers = {
-        "pyproject.toml",
-        "setup.py",
-        "setup.cfg",
-        "requirements.txt",
-        "Pipfile",
-        "pyrightconfig.json",
-        ".git",
-    },
-    settings = {
-        basedpyright = {
-            analysis = {
-                ---@type "strict" | "standard" | "basic"
-                typeCheckingMode = "strict",
-                autoSearchPaths = true, -- 自动添加常见搜索路径
-                diagnosticMode = "openFilesOnly", -- 仅分析打开的文件
-                useLibraryCodeForTypes = true,
-                inlayHints = {
-                    variableTypes = true, -- 变量赋值时显示类型提示
-                    callArgumentNames = true, -- 在函数参数上显示类型提示
-                    functionReturnTypes = true, -- 在函数返回类型上显示提示
-                    genericTypes = true, -- 在推断的泛型类型上显示提示
-                },
-            },
-        },
-    },
+	cmd = { "basedpyright-langserver", "--stdio" },
+	filetypes = { "python" },
+	root_markers = {
+		"pyproject.toml",
+		"setup.py",
+		"setup.cfg",
+		"requirements.txt",
+		"Pipfile",
+		"pyrightconfig.json",
+		".git",
+	},
+	settings = {
+		basedpyright = {
+			analysis = {
+				---@type "strict" | "standard" | "basic"
+				typeCheckingMode = "strict",
+				autoSearchPaths = true, -- 自动添加常见搜索路径
+				diagnosticMode = "openFilesOnly", -- 仅分析打开的文件
+				useLibraryCodeForTypes = true,
+				inlayHints = {
+					variableTypes = true, -- 变量赋值时显示类型提示
+					callArgumentNames = true, -- 在函数参数上显示类型提示
+					functionReturnTypes = true, -- 在函数返回类型上显示提示
+					genericTypes = true, -- 在推断的泛型类型上显示提示
+				},
+			},
+		},
+	},
 }
 
 server_configs.bashls = {
-    cmd = { "bash-language-server", "start" },
-    filetypes = { "bash", "sh" },
-    root_markers = { ".git" },
-    settings = {
-        bashIde = {
-            globPattern = "*@(.sh|.inc|.bash|.command)",
-        },
-    },
+	cmd = { "bash-language-server", "start" },
+	filetypes = { "bash", "sh" },
+	root_markers = { ".git" },
+	settings = {
+		bashIde = {
+			globPattern = "*@(.sh|.inc|.bash|.command)",
+		},
+	},
 }
 
 server_configs.clangd = {
-    cmd = {
-        "clangd",
-        "--background-index", -- 启用后台索引
-        "--clang-tidy", -- 启用 clang-tidy
-        "--header-insertion=iwyu", -- 使用 Include What You Use (IWYU) 插入头文件
-        "--completion-style=detailed", -- 使用详细的补全样式
-        "--function-arg-placeholders", -- 在函数参数中使用占位符
-        "--fallback-style=llvm", -- 使用 LLVM 风格作为回退样式
-    },
-    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-    root_markers = {
-        ".clangd",
-        ".clang-tidy",
-        ".clang-format",
-        "compile_commands.json",
-        "compile_flags.txt",
-        "configure.ac",
-        ".git",
-    },
-    init_options = {
-        clangdFileStatus = true, -- 启用文件状态
-        usePlaceholders = true, -- 在代码补全时使用占位符
-        completeUnimported = true, -- 自动补全未导入的头文件
-    },
+	cmd = {
+		"clangd",
+		"--background-index", -- 启用后台索引
+		"--clang-tidy", -- 启用 clang-tidy
+		"--header-insertion=iwyu", -- 使用 Include What You Use (IWYU) 插入头文件
+		"--completion-style=detailed", -- 使用详细的补全样式
+		"--function-arg-placeholders", -- 在函数参数中使用占位符
+		"--fallback-style=llvm", -- 使用 LLVM 风格作为回退样式
+	},
+	filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+	root_markers = {
+		".clangd",
+		".clang-tidy",
+		".clang-format",
+		"compile_commands.json",
+		"compile_flags.txt",
+		"configure.ac",
+		".git",
+	},
+	init_options = {
+		clangdFileStatus = true, -- 启用文件状态
+		usePlaceholders = true, -- 在代码补全时使用占位符
+		completeUnimported = true, -- 自动补全未导入的头文件
+	},
 }
 
 -- https://github.com/coder3101/protols
 server_configs.protols = {
-    cmd = { "protols" },
-    filetypes = { "proto" },
-    root_markers = { ".git" },
+	cmd = { "protols" },
+	filetypes = { "proto" },
+	root_markers = { ".git" },
 }
 
 server_configs.gopls = {
-    cmd = { "gopls" },
-    filetypes = { "go", "gomod", "gowork", "gotmpl" },
-    settings = {
-        gopls = {
-            -- gofumpt = true,  -- 使用 gofumpt 格式化代码
-            codelenses = {
-                gc_details = false, -- 不显示垃圾回收详细信息的代码镜头
-                generate = true, -- 显示生成代码的代码镜头
-                regenerate_cgo = true, -- 显示重新生成 cgo 文件的代码镜头
-                run_govulncheck = true, -- 显示运行 go vuln check 的代码镜头
-                test = true, -- 显示运行测试的代码镜头
-                tidy = true, -- 显示运行 go mod tidy 的代码镜头
-                upgrade_dependency = true, -- 显示升级依赖项的代码镜头
-                vendor = true, -- 显示运行 go mod vendor 的代码镜头
-            },
-            hints = {
-                assignVariableTypes = true, -- 启用变量类型分配提示
-                compositeLiteralFields = true, -- 启动复合字面量字段提示
-                compositeLiteralTypes = true, -- 启用复合字面量类型提示
-                constantValues = true, -- 启用常量值提示
-                functionTypeParameters = true, -- 启用函数类型参数提示
-                parameterNames = true, -- 启用参数名称提示
-                rangeVariableTypes = true, -- 启用范围变量类型提示
-            },
-            analyses = {
-                -- fieldalignment = true,          -- 检查结构体字段是否对齐，建议优化字段顺序以减少内存占用
-                nilness = true, -- 检查可能的 nil 值错误
-                unusedparams = true, -- 检查未使用的函数参数
-                unusedwrite = true, -- 检查对变量的未使用参数
-                useany = true, -- 检查使用 interface{} 类型的变量
-            },
-            staticcheck = true, -- 使用静态分析工具
-            usePlaceholders = true, -- 在代码补全时使用占位符
-            completeUnimported = true, -- 自动补全未导入的包
-            directoryFilters = { -- 过滤特定目录，不再这些目录中进行分析
-                "-.git",
-                "-.vscode",
-                "-.idea",
-                "-.vscode-test",
-                "-node_modules",
-            },
-            semanticTokens = true, -- 启用语义令牌支持，提供更丰富的语法高亮
-        },
-    },
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	settings = {
+		gopls = {
+			-- gofumpt = true,  -- 使用 gofumpt 格式化代码
+			codelenses = {
+				gc_details = false, -- 不显示垃圾回收详细信息的代码镜头
+				generate = true, -- 显示生成代码的代码镜头
+				regenerate_cgo = true, -- 显示重新生成 cgo 文件的代码镜头
+				run_govulncheck = true, -- 显示运行 go vuln check 的代码镜头
+				test = true, -- 显示运行测试的代码镜头
+				tidy = true, -- 显示运行 go mod tidy 的代码镜头
+				upgrade_dependency = true, -- 显示升级依赖项的代码镜头
+				vendor = true, -- 显示运行 go mod vendor 的代码镜头
+			},
+			hints = {
+				assignVariableTypes = true, -- 启用变量类型分配提示
+				compositeLiteralFields = true, -- 启动复合字面量字段提示
+				compositeLiteralTypes = true, -- 启用复合字面量类型提示
+				constantValues = true, -- 启用常量值提示
+				functionTypeParameters = true, -- 启用函数类型参数提示
+				parameterNames = true, -- 启用参数名称提示
+				rangeVariableTypes = true, -- 启用范围变量类型提示
+			},
+			analyses = {
+				-- fieldalignment = true,          -- 检查结构体字段是否对齐，建议优化字段顺序以减少内存占用
+				nilness = true, -- 检查可能的 nil 值错误
+				unusedparams = true, -- 检查未使用的函数参数
+				unusedwrite = true, -- 检查对变量的未使用参数
+				useany = true, -- 检查使用 interface{} 类型的变量
+			},
+			staticcheck = true, -- 使用静态分析工具
+			usePlaceholders = true, -- 在代码补全时使用占位符
+			completeUnimported = true, -- 自动补全未导入的包
+			directoryFilters = { -- 过滤特定目录，不再这些目录中进行分析
+				"-.git",
+				"-.vscode",
+				"-.idea",
+				"-.vscode-test",
+				"-node_modules",
+			},
+			semanticTokens = true, -- 启用语义令牌支持，提供更丰富的语法高亮
+		},
+	},
 }
 
 server_configs.lua_ls = {
-    cmd = {
-        "lua-language-server",
-        "--locale=zh-cn",
-    },
-    filetypes = { "lua" },
-    root_markers = {
-        ".luarc.json",
-        ".luarc.jsonc",
-        ".luacheckrc",
-        ".stylua.toml",
-        "stylua.toml",
-        "selene.toml",
-        "selene.yml",
-        ".git",
-    },
-    settings = {
-        Lua = {
-            diagnostics = {
-                unusedLocalExclude = { "_*" },
-                globals = { "vim" },
-                disbale = {
-                    "luadoc-miss-see-name",
-                    "undefined-field",
-                },
-                neededFileStatus = {
-                    ["codestyle-check"] = "Any", -- 代码格式化
-                },
-            },
-            runtime = { version = "LuaJIT" }, -- 使用内置 LSP 客户端
-            workspace = {
-                library = {
-                    [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                    [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-                },
-                checkThirdParty = false, -- 不检查第三方库
-            },
-            codeLens = { enable = true },
-            doc = { privateName = { "^_" } },
-            hint = {
-                enable = true,
-                setType = false,
-                paramType = true,
-                paramName = "Disable",
-                semicolon = "Disable",
-                arrayIndex = "Disable",
-            },
-            completion = { callSnippet = "Replace" }, -- 仅显示调用片段
-            format = {
-                enable = true,
-                defaultConfig = {
-                    indent_style = "space",
-                    indent_size = "4",
-                },
-            },
-        },
-    },
+	cmd = {
+		"lua-language-server",
+		"--locale=zh-cn",
+	},
+	filetypes = { "lua" },
+	root_markers = {
+		".luarc.json",
+		".luarc.jsonc",
+		".luacheckrc",
+		".stylua.toml",
+		"stylua.toml",
+		"selene.toml",
+		"selene.yml",
+		".git",
+	},
+	settings = {
+		Lua = {
+			diagnostics = {
+				unusedLocalExclude = { "_*" },
+				globals = { "vim" }, -- 全局变量
+				disbale = {
+					"luadoc-miss-see-name",
+					"undefined-field",
+				}, -- 全局禁用诊断
+				neededFileStatus = {
+					["codestyle-check"] = "Any", -- 代码格式化
+				},
+			},
+			runtime = { version = "LuaJIT" }, -- 使用内置 LSP 客户端
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+				},
+				checkThirdParty = false, -- 不检查第三方库
+			},
+			codeLens = { enable = true },
+			doc = { privateName = { "^_" } }, -- 私有字段
+			hint = {
+				enable = true,
+				setType = false, -- 不显示在赋值中的类型
+				paramType = true, -- 显示参数类型的提示
+				paramName = "Disable", -- 不显示参数提示
+				semicolon = "Disable", -- 不显示在语句末尾添加分号提示
+				arrayIndex = "Disable", -- 禁用数组索引提示
+			},
+			completion = {
+				callSnippet = "Replace", -- 仅显示调用片段
+				postfix = "@", -- 触发后缀建议的字符
+			},
+			format = {
+				enable = true,
+				defaultConfig = {
+					indent_style = "tab", -- space
+					indent_size = "1", -- 4
+				},
+			},
+		},
+	},
 }
 
 local M = {}
 
 M.setup = function(_, opts)
-    -- vim.lsp.set_log_level("debug")
+	-- vim.lsp.set_log_level("debug")
 
-    opts = vim.tbl_deep_extend("force", default_opts, opts or {})
+	opts = vim.tbl_deep_extend("force", default_opts, opts or {})
 
-    for _, language in ipairs(languages) do
-        vim.lsp.enable(language)
+	for _, language in ipairs(languages) do
+		vim.lsp.enable(language)
 
-        local config = server_configs[language] or {}
-        local merged_config = vim.tbl_deep_extend("force", opts, config)
+		local config = server_configs[language] or {}
+		local merged_config = vim.tbl_deep_extend("force", opts, config)
 
-        vim.lsp.config(language, merged_config)
-    end
+		vim.lsp.config(language, merged_config)
+	end
 end
 
 return M
