@@ -3,6 +3,6 @@
 .vscode
 .idea
 
-lazy_lock.json
+lazy-lock.json
 
 .ruff_cache
