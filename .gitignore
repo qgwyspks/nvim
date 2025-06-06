@@ -2,3 +2,7 @@
 */.DS_Store
 .vscode
 .idea
+
+lazy_lock.json
+
+.ruff_cache
