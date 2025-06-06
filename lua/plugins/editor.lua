@@ -122,4 +122,22 @@ return {
             },
         },
     },
+    -- {
+    --     "folke/trouble.nvim",
+    --     opts = {
+    --         modes = {
+    --             lsp = {
+    --                 win = { position = "right" },
+    --             },
+    --         },
+    --     },
+    --     cmd = "Trouble",
+    --     keys = {
+    --         {
+    --             "<leader>xx",
+    --             "<cmd>Trouble diagnostics toggle<cr>",
+    --             desc = "诊断",
+    --         },
+    --     },
+    -- },
 }

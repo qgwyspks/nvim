@@ -1,6 +1,6 @@
 local languages = {
     "bashls", -- Bash
-    "clangd",  -- C/C++
+    "clangd", -- C/C++
     -- "csharp_ls", -- C#
     -- "dockerls", -- Docker
     -- "docker_compose_language_service",  -- Docker Compose
@@ -10,11 +10,11 @@ local languages = {
     -- "vimls",  -- VimL
     -- "jsonls",  -- JSON
     -- "taplo",  -- TOML
-    "gopls",  -- Go
-    "protols",  -- Proto3  cargo install protols
-    "lua_ls",  -- Lua
+    "gopls", -- Go
+    "protols", -- Proto3  cargo install protols
+    "lua_ls", -- Lua
     -- "marksman",  -- Markdown
-    "basedpyright",  -- Python
+    "basedpyright", -- Python
     -- "pyright",  -- Python pylsp ruff rufflsp
     -- "texlab",  -- LaTeX
 }
@@ -48,22 +48,32 @@ local server_configs = {}
 server_configs.basedpyright = {
     cmd = { "basedpyright-langserver", "--stdio" },
     filetypes = { "python" },
-    root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
+    root_markers = {
+        "pyproject.toml",
+        "setup.py",
+        "setup.cfg",
+        "requirements.txt",
+        "Pipfile",
+        "pyrightconfig.json",
+        ".git",
+    },
     settings = {
         basedpyright = {
             analysis = {
-                autoSearchPaths = true,  -- 自动添加常见搜索路径
-                diagnosticMode = "openFilesOnly",  -- 仅分析打开的文件
+                ---@type "strict" | "standard" | "basic"
+                typeCheckingMode = "strict",
+                autoSearchPaths = true, -- 自动添加常见搜索路径
+                diagnosticMode = "openFilesOnly", -- 仅分析打开的文件
                 useLibraryCodeForTypes = true,
                 inlayHints = {
-                    variableTypes = true,  -- 变量赋值时显示类型提示
-                    callArgumentNames = true,  -- 在函数参数上显示类型提示
-                    functionReturnTypes = true,  -- 在函数返回类型上显示提示
-                    genericTypes = true,  -- 在推断的泛型类型上显示提示
-                }
-            }
-        }
-    }
+                    variableTypes = true, -- 变量赋值时显示类型提示
+                    callArgumentNames = true, -- 在函数参数上显示类型提示
+                    functionReturnTypes = true, -- 在函数返回类型上显示提示
+                    genericTypes = true, -- 在推断的泛型类型上显示提示
+                },
+            },
+        },
+    },
 }
 
 server_configs.bashls = {
@@ -72,27 +82,35 @@ server_configs.bashls = {
     root_markers = { ".git" },
     settings = {
         bashIde = {
-            globPattern = "*@(.sh|.inc|.bash|.command)"
-        }
-    }
+            globPattern = "*@(.sh|.inc|.bash|.command)",
+        },
+    },
 }
 
 server_configs.clangd = {
     cmd = {
         "clangd",
-        "--background-index",  -- 启用后台索引
-        "--clang-tidy",  -- 启用 clang-tidy
+        "--background-index", -- 启用后台索引
+        "--clang-tidy", -- 启用 clang-tidy
         "--header-insertion=iwyu", -- 使用 Include What You Use (IWYU) 插入头文件
-        "--completion-style=detailed",  -- 使用详细的补全样式
-        "--function-arg-placeholders",  -- 在函数参数中使用占位符
+        "--completion-style=detailed", -- 使用详细的补全样式
+        "--function-arg-placeholders", -- 在函数参数中使用占位符
         "--fallback-style=llvm", -- 使用 LLVM 风格作为回退样式
     },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-    root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git" },
+    root_markers = {
+        ".clangd",
+        ".clang-tidy",
+        ".clang-format",
+        "compile_commands.json",
+        "compile_flags.txt",
+        "configure.ac",
+        ".git",
+    },
     init_options = {
-        clangdFileStatus = true,  -- 启用文件状态
-        usePlaceholders = true,  -- 在代码补全时使用占位符
-        completeUnimported = true,  -- 自动补全未导入的头文件
+        clangdFileStatus = true, -- 启用文件状态
+        usePlaceholders = true, -- 在代码补全时使用占位符
+        completeUnimported = true, -- 自动补全未导入的头文件
     },
 }
 
@@ -102,7 +120,6 @@ server_configs.protols = {
     filetypes = { "proto" },
     root_markers = { ".git" },
 }
-
 
 server_configs.gopls = {
     cmd = { "gopls" },
@@ -157,7 +174,16 @@ server_configs.lua_ls = {
         "--locale=zh-cn",
     },
     filetypes = { "lua" },
-    root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
+    root_markers = {
+        ".luarc.json",
+        ".luarc.jsonc",
+        ".luacheckrc",
+        ".stylua.toml",
+        "stylua.toml",
+        "selene.toml",
+        "selene.yml",
+        ".git",
+    },
     settings = {
         Lua = {
             diagnostics = {

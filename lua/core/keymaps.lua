@@ -6,7 +6,7 @@ local map = vim.keymap.set
 
 local opts = {
     expr = true,
-    silent = true
+    silent = true,
 }
 
 map("i", "jk", "<Esc>", opts)
@@ -23,12 +23,11 @@ map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 -- map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 -- map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 -- windows
-map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
+map("n", "<leader>wd", "<C-W>c", { desc = "窗口: 删除" })
 -- map("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
 -- map("n", "<leader>w\\", "<C-W>v", { desc = "Split window right" })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
-map("n", "<leader>\\", "<C-W>v", { desc = "Split window right" })
+map("n", "<leader>-", "<C-W>s", { desc = "水平分割" })
+map("n", "<leader>\\", "<C-W>v", { desc = "垂直分割" })
 
 -- 退出终端插入模式
 map("t", "<Esc>", "<C-\\><C-n>", opts)
